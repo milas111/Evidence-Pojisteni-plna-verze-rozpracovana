@@ -1,0 +1,23 @@
+﻿@model EvidencePojisteni.Models.Insurance
+
+@{
+    ViewData["Title"] = "Nové pojištění";
+}
+
+<h4 class="font-weight-bold">Nové pojištění</h4>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="InsuranceName" class="control-label"></label>
+                <input asp-for="InsuranceName" class="form-control" />
+                <span asp-validation-for="InsuranceName" class="text-danger"></span>
+            </div>
+            <div class="form-group text-center my-4">
+                <input type="submit" value="Uložit" class="btn btn-lg btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

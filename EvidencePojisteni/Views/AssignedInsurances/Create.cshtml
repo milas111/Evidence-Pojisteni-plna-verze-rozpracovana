@@ -1,0 +1,48 @@
+﻿@model EvidencePojisteni.Models.AssignedInsurance
+
+@{
+    ViewData["Title"] = "Přidání pojištění";
+}
+
+<h4 class="font-weight-bold">Přidat pojištění k @ViewBag.Name</h4>
+<br />
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="form-group col-12 col-md-8">
+            <label asp-for="InsuranceId" class="control-label"></label>
+            <select asp-for="InsuranceId" class="form-control" asp-items="ViewBag.InsuranceId"></select>
+        </div>
+    </div>
+    <div class="d-none">
+        <label asp-for="InsuredId" class="control-label"></label>
+        <select asp-for="InsuredId" class="form-control" asp-items="ViewBag.InsuredId"></select>
+    </div>
+    <div class="row">
+        <div class="form-group col-12 col-md-4">
+            <label asp-for="Value" class="control-label"></label>
+            <input asp-for="Value" class="form-control" />
+            <span asp-validation-for="Value" class="text-danger"></span>
+        </div>
+        <div class="form-group col-12 col-md-4">
+            <label asp-for="Issue" class="control-label"></label>
+            <input asp-for="Issue" class="form-control" />
+            <span asp-validation-for="Issue" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-12 col-md-4">
+            <label asp-for="ValidFrom" class="control-label"></label>
+            <input asp-for="ValidFrom" class="form-control" />
+            <span asp-validation-for="ValidFrom" class="text-danger"></span>
+        </div>
+        <div class="form-group col-12 col-md-4">
+            <label asp-for="ValidTo" class="control-label"></label>
+            <input asp-for="ValidTo" class="form-control" />
+            <span asp-validation-for="ValidTo" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group text-center my-4">
+        <input type="submit" value="Uložit" class="btn btn-lg btn-primary" />
+    </div>
+</form>

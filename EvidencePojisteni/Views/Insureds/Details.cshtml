@@ -1,0 +1,84 @@
+﻿@model EvidencePojisteni.Models.Insured
+
+@{
+    ViewData["Title"] = "Detail pojištěnce";
+    var fullName = Model.FirstName + " " + Model.SurName;
+    var adress = Model.Street + ", " + Model.City;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2">
+            <img src="~/Images/life-insurance.png" width="150px" />
+        </div>
+        <div class="col-sm-10">
+            <div class="row">
+                <div class="h4 col-12 font-weight-bold">
+                    <br />
+                    @Html.DisplayFor(model => fullName)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="p">
+                        @Html.DisplayFor(model => model.Street)
+                    </div>
+                    <div class="p">
+                        @Html.DisplayFor(model => model.City)
+                    </div>
+                    <div class="p">
+                        @Html.DisplayFor(model => model.Zip)
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="p">
+                        @Html.DisplayFor(model => model.Email)
+                    </div>
+                    <div class="p">
+                        @Html.DisplayFor(model => model.Phone)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<h3>Sjednaná pojištění</h3>
+<br>
+
+<table class="table border border-dark">
+    <thead>
+        <tr>
+            <th class="border border-dark">
+                Pojištění
+            </th>
+            <th class="border border-dark">
+                Částka
+            </th>
+            <th class="border border-dark"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.AssignedInsurances)
+        {
+            <tr>
+                <td class="border border-dark">
+                    <a asp-controller="AssignedInsurances" asp-action="Details" asp-route-id="@item.AssignedInsuranceId">@Html.DisplayFor(modelItem => item.Insurance.InsuranceName)</a>
+                </td>
+                <td class="border border-dark">
+                    @Html.DisplayFor(modelItem => item.Value) Kč
+                </td>
+                <td class="border border-dark p-1">
+                    <a class="btn btn-danger my-1" style="width:100px" asp-controller="AssignedInsurances" asp-action="Delete" asp-route-id="@item.AssignedInsuranceId">Odstranit</a>
+                    <a class="btn btn-warning my-1 text-white" style="width:100px" asp-controller="AssignedInsurances" asp-action="Edit" asp-route-id="@item.AssignedInsuranceId">Editovat</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="text-center p-3">
+    <a class="btn btn-lg btn-primary mx-1" asp-controller="AssignedInsurances" asp-route-insuredId="@Model.InsuredId" asp-action="Create">Přidat pojištění</a>
+    <a class="btn btn-lg btn-warning text-white mx-1" asp-action="Edit" asp-route-id="@Model.InsuredId">Editovat pojištěnce</a>
+    <a class="btn btn-lg btn-danger mx-1" asp-action="Delete" asp-route-id="@Model.InsuredId">Odstranit pojištěnce</a>
+</div>

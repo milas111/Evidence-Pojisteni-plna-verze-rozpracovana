@@ -1,0 +1,67 @@
+﻿@model IEnumerable<EvidencePojisteni.Models.Insured>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
+@{
+    ViewData["Title"] = "Pojištěnci";
+}
+
+<h3 class="mt-5 font-weight-bold">Pojištěnci</h3>
+
+<p class="text-center my-4">
+    <a class="btn btn-lg btn-primary" asp-action="Create">Nový pojištěnec</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="border border-dark">
+                Jméno
+            </th>
+            <th class="border border-dark">
+                Bydliště
+            </th>
+            <th class="border border-dark"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="border border-dark">
+                    <a asp-action="Details" asp-route-id="@item.InsuredId">
+                        @{
+                            var fullName = item.FirstName + " " + item.SurName;
+                            @Html.DisplayFor(modelItem => fullName)
+                        }
+                    </a>
+                </td>
+                <td class="border border-dark">
+                    @{
+                        var adress = item.Street + ", " + item.City;
+                        @Html.DisplayFor(modelItem => adress)
+                    }
+                </td>
+                <td class="border border-dark p-1">
+                    <a class="btn btn-danger my-1" style="width:100px" asp-action="Delete" asp-route-id="@item.InsuredId">Odstranit</a>
+                    <a class="btn btn-warning text-white my-1" style="width:100px" asp-action="Edit" asp-route-id="@item.InsuredId">Editovat</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+    @Html.PagedListPager((IPagedList)ViewBag.InsuredList, page => Url.Action("Index", new
+    {
+    page
+    }
+    ), new X.PagedList.Web.Common.PagedListRenderOptions
+    {
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" },
+    LinkToPreviousPageFormat = "Předchozí",
+    LinkToNextPageFormat = "Další",
+    MaximumPageNumbersToDisplay = 5,
+    UlElementClasses=new[] { "pagination justify-content-center my-4" }
+    }
+    )

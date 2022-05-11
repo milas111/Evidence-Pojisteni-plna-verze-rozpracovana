@@ -1,0 +1,36 @@
+﻿@model IEnumerable<EvidencePojisteni.Models.Insurance>
+
+@{
+    ViewData["Title"] = "Pojištění";
+}
+
+<h3 class="mt-5 font-weight-bold">Pojištění</h3>
+
+<p class="text-center my-4">
+    <a class="btn btn-lg btn-primary" asp-action="Create">Nové pojištění</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="border border-dark">
+                @Html.DisplayNameFor(model => model.InsuranceName)
+            </th>
+            <th class="border border-dark"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="border border-dark">
+                    <a asp-action="Details" asp-route-id="@item.InsuranceId">@Html.DisplayFor(modelItem => item.InsuranceName)</a>
+                </td>
+                <td class="border border-dark p-1">
+                    <a class="btn btn-danger my-1" asp-action="Delete" asp-route-id="@item.InsuranceId">Odstranit</a>
+                    <a class="btn btn-warning text-white my-1" asp-action="Edit" asp-route-id="@item.InsuranceId">Editovat</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
